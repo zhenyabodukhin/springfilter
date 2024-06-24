@@ -1,26 +1,26 @@
 package com.turkraft.springfilter.converter;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.turkraft.springfilter.converter.StringCustomObjectIdConverter.CustomObjectId;
+import com.turkraft.springfilter.converter.DateConverter.CustomDate;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 
 @Service
-public class StringCustomObjectIdConverter implements Converter<String, CustomObjectId> {
+public class DateConverter implements Converter<String, CustomDate> {
 
     @Override
-    public CustomObjectId convert(String source) {
-        return new CustomObjectId(source);
+    public CustomDate convert(String source) {
+        return new CustomDate(source);
     }
 
-    public static class CustomObjectId implements Serializable {
+    public static class CustomDate implements Serializable {
 
-        @JsonProperty("$oid")
+        @JsonProperty("$date")
         private String value;
 
-        public CustomObjectId(String id) {
+        public CustomDate(String id) {
             this.value = id;
         }
 

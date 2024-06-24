@@ -7,9 +7,9 @@ import com.turkraft.springfilter.transformer.FilterJsonNodeTransformer;
 
 public interface JsonNodeHelper {
 
-  ObjectNode wrapWithMongoExpression(JsonNode node);
+    ObjectNode wrapWithMongoExpression(JsonNode node);
 
-  JsonNode transform(FilterJsonNodeTransformer transformer, InfixOperationNode source,
-      String mongoOperator);
+    JsonNode transform(FilterJsonNodeTransformer transformer, InfixOperationNode source,
+                       String mongoOperator);
 
 }

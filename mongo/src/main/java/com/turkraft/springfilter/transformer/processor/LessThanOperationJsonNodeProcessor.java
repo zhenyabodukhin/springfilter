@@ -10,29 +10,29 @@ import org.springframework.stereotype.Component;
 @Component
 public class LessThanOperationJsonNodeProcessor extends InfixOperationJsonNodeProcessor {
 
-  public LessThanOperationJsonNodeProcessor(JsonNodeHelper jsonNodeHelper) {
-    super(jsonNodeHelper);
-  }
+    public LessThanOperationJsonNodeProcessor(JsonNodeHelper jsonNodeHelper) {
+        super(jsonNodeHelper);
+    }
 
-  @Override
-  public Class<FilterJsonNodeTransformer> getTransformerType() {
-    return FilterJsonNodeTransformer.class;
-  }
+    @Override
+    public Class<FilterJsonNodeTransformer> getTransformerType() {
+        return FilterJsonNodeTransformer.class;
+    }
 
-  @Override
-  public Class<LessThanOperator> getDefinitionType() {
-    return LessThanOperator.class;
-  }
+    @Override
+    public Class<LessThanOperator> getDefinitionType() {
+        return LessThanOperator.class;
+    }
 
-  @Override
-  public String getMongoOperator() {
-    return "$lt";
-  }
+    @Override
+    public String getMongoOperator() {
+        return "$lt";
+    }
 
-  @Override
-  public JsonNode process(FilterJsonNodeTransformer transformer, InfixOperationNode source) {
-    transformer.registerTargetType(source, Boolean.class);
-    return super.process(transformer, source);
-  }
+    @Override
+    public JsonNode process(FilterJsonNodeTransformer transformer, InfixOperationNode source) {
+        transformer.registerTargetType(source, Boolean.class);
+        return super.process(transformer, source);
+    }
 
 }

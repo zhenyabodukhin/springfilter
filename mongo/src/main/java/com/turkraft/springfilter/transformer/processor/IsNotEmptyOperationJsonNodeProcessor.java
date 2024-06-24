@@ -8,31 +8,31 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class IsNotEmptyOperationJsonNodeProcessor implements
-    FilterPostfixOperationProcessor<FilterJsonNodeTransformer, JsonNode> {
+        FilterPostfixOperationProcessor<FilterJsonNodeTransformer, JsonNode> {
 
-  @Override
-  public Class<FilterJsonNodeTransformer> getTransformerType() {
-    return FilterJsonNodeTransformer.class;
-  }
+    @Override
+    public Class<FilterJsonNodeTransformer> getTransformerType() {
+        return FilterJsonNodeTransformer.class;
+    }
 
-  @Override
-  public Class<IsNotEmptyOperator> getDefinitionType() {
-    return IsNotEmptyOperator.class;
-  }
+    @Override
+    public Class<IsNotEmptyOperator> getDefinitionType() {
+        return IsNotEmptyOperator.class;
+    }
 
-  @Override
-  public JsonNode process(FilterJsonNodeTransformer transformer,
-      PostfixOperationNode postfixOperationNode) {
-    transformer.registerTargetType(postfixOperationNode, Boolean.class);
-    return transformer.getObjectMapper().createObjectNode().set("$and",
-        transformer.getObjectMapper().createArrayNode()
-            .add(transformer.getObjectMapper().createObjectNode()
-                .set("$isArray", transformer.transform(postfixOperationNode.getLeft())))
-            .add(transformer.getObjectMapper().createObjectNode().set("$gt",
+    @Override
+    public JsonNode process(FilterJsonNodeTransformer transformer,
+                            PostfixOperationNode postfixOperationNode) {
+        transformer.registerTargetType(postfixOperationNode, Boolean.class);
+        return transformer.getObjectMapper().createObjectNode().set("$and",
                 transformer.getObjectMapper().createArrayNode()
-                    .add(transformer.getObjectMapper().createObjectNode()
-                        .set("$size", transformer.transform(postfixOperationNode.getLeft())))
-                    .add(transformer.getObjectMapper().createObjectNode().numberNode(0)))));
-  }
+                        .add(transformer.getObjectMapper().createObjectNode()
+                                .set("$isArray", transformer.transform(postfixOperationNode.getLeft())))
+                        .add(transformer.getObjectMapper().createObjectNode().set("$gt",
+                                transformer.getObjectMapper().createArrayNode()
+                                        .add(transformer.getObjectMapper().createObjectNode()
+                                                .set("$size", transformer.transform(postfixOperationNode.getLeft())))
+                                        .add(transformer.getObjectMapper().createObjectNode().numberNode(0)))));
+    }
 
 }

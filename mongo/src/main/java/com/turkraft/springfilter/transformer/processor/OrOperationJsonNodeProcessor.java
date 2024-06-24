@@ -10,31 +10,31 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrOperationJsonNodeProcessor extends InfixOperationJsonNodeProcessor {
 
-  public OrOperationJsonNodeProcessor(JsonNodeHelper jsonNodeHelper) {
-    super(jsonNodeHelper);
-  }
+    public OrOperationJsonNodeProcessor(JsonNodeHelper jsonNodeHelper) {
+        super(jsonNodeHelper);
+    }
 
-  @Override
-  public Class<FilterJsonNodeTransformer> getTransformerType() {
-    return FilterJsonNodeTransformer.class;
-  }
+    @Override
+    public Class<FilterJsonNodeTransformer> getTransformerType() {
+        return FilterJsonNodeTransformer.class;
+    }
 
-  @Override
-  public Class<OrOperator> getDefinitionType() {
-    return OrOperator.class;
-  }
+    @Override
+    public Class<OrOperator> getDefinitionType() {
+        return OrOperator.class;
+    }
 
-  @Override
-  public String getMongoOperator() {
-    return "$or";
-  }
+    @Override
+    public String getMongoOperator() {
+        return "$or";
+    }
 
-  @Override
-  public JsonNode process(FilterJsonNodeTransformer transformer, InfixOperationNode source) {
-    transformer.registerTargetType(source, Boolean.class);
-    transformer.registerTargetType(source.getLeft(), Boolean.class);
-    transformer.registerTargetType(source.getRight(), Boolean.class);
-    return super.process(transformer, source);
-  }
+    @Override
+    public JsonNode process(FilterJsonNodeTransformer transformer, InfixOperationNode source) {
+        transformer.registerTargetType(source, Boolean.class);
+        transformer.registerTargetType(source.getLeft(), Boolean.class);
+        transformer.registerTargetType(source.getRight(), Boolean.class);
+        return super.process(transformer, source);
+    }
 
 }
